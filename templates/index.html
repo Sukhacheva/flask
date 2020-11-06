@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      text="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+      rel="stylesheet"
+    />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <div class="container_box">
+      <div class="container">
+        <h1>Список заданий</h1>
+        <form class="form" action="/add" method="POST">
+          <div class="form_box">
+            <input
+              class="task_input"
+              type="text"
+              name="message"
+              value=""
+              required
+            /><button class="add_btn" type="submit">+</button>
+          </div>
+        </form>
+
+        <ul class="unfinished_tasks">
+          {% for item in unfinished %}
+          <li>
+            <div class="unfinished_task">
+              <span class="checkbox"></span>
+              <a href="/complete/{{item._id}}">{{item.message}}</a>
+            </div>
+          </li>
+          {% endfor %}
+      
+
+        <ul class="finished_tasks">
+          {% for item in finished %}
+          <li>
+            <span class="finished_task">{{item.message}}</span>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="delete_btn__box">
+          <a href="/delete" class="delete_btn">Очистить список</a>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+</html>
